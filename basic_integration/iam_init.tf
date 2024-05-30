@@ -1,5 +1,5 @@
 resource "aws_iam_role" "lightlytics-init-role" {
-  name = "${var.environment}-lightlytics-init-role"
+  name = coalesce(var.init_role_name, "${var.environment}-lightlytics-init-role")
   assume_role_policy = jsonencode({
     "Version" : "2012-10-17",
     "Statement" : [
@@ -15,7 +15,7 @@ resource "aws_iam_role" "lightlytics-init-role" {
 }
 
 resource "aws_iam_policy" "lightlytics-init-policy" {
-  name   = "${var.environment}-lightlytics-init-policy"
+  name   = coalesce(var.init_policy_name, "${var.environment}-lightlytics-init-policy")
   path   = "/"
   policy = jsonencode({
     "Version" : "2012-10-17"
