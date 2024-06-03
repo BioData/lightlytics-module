@@ -1,6 +1,6 @@
 resource "aws_iam_role" "lightlytics-CloudWatch-role" {
   count = var.enable_cloudtrail == true ? 1 : 0
-  name = "${var.environment}-lightlytics-CloudWatch-role"
+  name = coalesce(var.cloudwatch_role_name, "${var.environment}-lightlytics-CloudWatch-role")
   assume_role_policy = jsonencode({
     "Version" : "2012-10-17",
     "Statement" : [
@@ -17,7 +17,7 @@ resource "aws_iam_role" "lightlytics-CloudWatch-role" {
 
 resource "aws_iam_policy" "lightlytics_lambda_policy" {
   count = var.enable_cloudtrail == true ? 1 : 0
-  name   = "${var.environment}-lightlytics-secret-policy"
+  name = coalesce(var.cloudwatch_secret_policy_name, "${var.environment}-lightlytics-secret-policy")
   policy = jsonencode({
     "Version" : "2012-10-17"
     "Statement" : [
@@ -42,7 +42,7 @@ resource "aws_iam_policy" "lightlytics_lambda_policy" {
 
 resource "aws_iam_policy" "lightlytics-CloudWatch-policy" {
   count = var.enable_cloudtrail == true ? 1 : 0
-  name   = "${var.environment}-lightlytics-CloudWatch-policy"
+  name = coalesce(var.cloudwatch_policy_name, "${var.environment}-lightlytics-CloudWatch-policy")
   path   = "/"
   policy = jsonencode({
     "Version" : "2012-10-17"

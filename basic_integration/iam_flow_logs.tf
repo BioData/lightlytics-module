@@ -1,6 +1,6 @@
 resource "aws_iam_role" "lightlytics-FlowLogs-lambda-role" {
   count = var.enable_flowlogs == true ? 1 : 0
-  name = "${var.environment}-lightlytics-FlowLogs-role"
+  name = coalesce(var.flowlogs_role_name, "${var.environment}-lightlytics-FlowLogs-role")
   assume_role_policy = jsonencode({
     "Version" : "2012-10-17",
     "Statement" = [
@@ -17,7 +17,7 @@ resource "aws_iam_role" "lightlytics-FlowLogs-lambda-role" {
 
 resource "aws_iam_policy" "lightlytics_flowlogs_secret_lambda_policy" {
   count = var.enable_flowlogs == true ? 1 : 0
-  name   = "${var.environment}-lightlytics-flowlogs-secret-policy"
+  name = coalesce(var.flowlogs_secret_policy_name, "${var.environment}-lightlytics-flowlogs-secret-policy")
   policy = jsonencode({
     "Version" : "2012-10-17"
     "Statement" : [
@@ -42,7 +42,7 @@ resource "aws_iam_policy" "lightlytics_flowlogs_secret_lambda_policy" {
 
 resource "aws_iam_policy" "lightlytics-FlowLogs-lambda-policy" {
   count = var.enable_flowlogs == true ? 1 : 0
-  name   = "${var.environment}-lightlytics-FlowLogs-lambda-policy"
+  name = coalesce(var.flowlogs_policy_name, "${var.environment}-lightlytics-FlowLogs-lambda-policy")
   path   = "/"
   policy = jsonencode({
     "Version" : "2012-10-17"
