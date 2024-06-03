@@ -3,7 +3,7 @@ output "lightlytics_api_url" {
 }
 
 output "lightlytics_cloudwatch_role" {
-  value = aws_iam_role.lightlytics-CloudWatch-role[0].arn
+  value = var.enable_cloudtrail ? aws_iam_role.lightlytics-CloudWatch-role[0].arn : null
 }
 
 output "lightlytics_flowlogs_role" {
