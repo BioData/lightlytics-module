@@ -1,6 +1,6 @@
 resource "aws_iam_role" "lightlytics-IamActivity-lambda-role" {
   count = var.enable_iam_activity == true ? 1 : 0
-  name = "${var.environment}-lightlytics-IamActivity-role"
+  name = coalesce(var.iam_activity_role_name, "${var.environment}-lightlytics-IamActivity-role")
   assume_role_policy = jsonencode({
     "Version" : "2012-10-17",
     "Statement" = [
@@ -17,7 +17,7 @@ resource "aws_iam_role" "lightlytics-IamActivity-lambda-role" {
 
 resource "aws_iam_policy" "lightlytics-IamActivity-lambda-policy" {
   count = var.enable_iam_activity == true ? 1 : 0
-  name   = "${var.environment}-lightlytics-IamActivity-lambda-policy"
+  name  = coalesce(var.iam_activity_policy_name, "${var.environment}-lightlytics-IamActivity-lambda-policy")
   path   = "/"
   policy = jsonencode({
     "Version" : "2012-10-17"

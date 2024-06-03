@@ -13,6 +13,73 @@ variable "lightlytics_auth_token" {
 }
 data "aws_region" "current" {}
 
+###############------------Optional Name for IAM policies and roles ----------------#############
+
+variable "scan_role_name" {
+  description = "overwrite the default xxx-lightlytics-role name."
+  type        = string
+  default     = null   
+}
+variable "scan_policy_name" {
+  description = "overwrite thedefault xxx--lightlytics-policyX name."
+  type        = string
+  default     = null
+}
+
+variable "init_role_name" {
+  description = "overwrite the default xxx-lightlytics-init-role name."
+  type        = string
+  default     = null
+}
+variable "init_policy_name" {
+  description = "overwrite the default lightlytics-init-policy name."
+  type        = string
+  default     = null
+}
+
+variable "iam_activity_role_name" {
+  description = "overwrite the default xxx-lightlytics-IamActivity-role name."
+  type        = string
+  default     = null
+}
+variable "iam_activity_policy_name" {
+  description = "overwrite the defualt xxx-lightlytics-IamActivity-lambda-policy  name."
+  type        = string
+  default     = null
+}
+
+variable "flowlogs_role_name" {
+  description = "overwrite the default xxx-lightlytics-FlowLogs-role name."
+  type        = string
+  default     = null
+}
+variable "flowlogs_policy_name" {
+  description = "overwrite the default xxx-lightlytics-FlowLogs-lambda-policy name."
+  type        = string
+  default     = null
+}
+variable "flowlogs_secret_policy_name" {
+  description = "overwrite the default xxx-lightlytics-flowlogs-secret-policy name."
+  type        = string
+  default     = null
+}
+
+variable "cloudwatch_role_name" {
+  description = "overwrite the  default xxx-lightlytics-CloudWatch-role name."
+  type        = string
+  default     = null
+}
+variable "cloudwatch_policy_name" {
+  description = "overwrite the default xxx-lightlytics-CloudWatch-policy name."
+  type        = string
+  default     = null
+}
+variable "cloudwatch_secret_policy_name" {
+  description = "overwrite the default xxx-lightlytics-secret-policy name."
+  type        = string
+  default     = null
+}
+
 ###############------------Environment-----------#############
 
 variable "domain_name" {

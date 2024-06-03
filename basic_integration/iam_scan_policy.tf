@@ -1,5 +1,5 @@
 resource "aws_iam_role" "lightlytics-role" {
-  name = "${var.environment}-lightlytics-role"
+  name = coalesce(var.scan_role_name, "${var.environment}-lightlytics-role")
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -22,7 +22,7 @@ EOF
 }
 
 resource "aws_iam_policy" "lightlytics-policy1" {
-  name = "${var.environment}-lightlytics-policy1"
+  name = coalesce("${var.scan_policy_name}1", "${var.environment}-lightlytics-policy1")
   path = "/"
   policy = jsonencode({
     "Version" : "2012-10-17"
@@ -37,7 +37,7 @@ resource "aws_iam_policy" "lightlytics-policy1" {
 }
 
 resource "aws_iam_policy" "lightlytics-policy2" {
-  name = "${var.environment}-lightlytics-policy2"
+  name = coalesce("${var.scan_policy_name}2", "${var.environment}-lightlytics-policy2")
   path = "/"
   policy = jsonencode({
     "Version" : "2012-10-17"
@@ -52,7 +52,7 @@ resource "aws_iam_policy" "lightlytics-policy2" {
 }
 
 resource "aws_iam_policy" "lightlytics-policy3" {
-  name = "${var.environment}-lightlytics-policy3"
+  name = coalesce("${var.scan_policy_name}3", "${var.environment}-lightlytics-policy3")
   path = "/"
   policy = jsonencode({
     "Version" : "2012-10-17"
