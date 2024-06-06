@@ -1,5 +1,5 @@
 resource "aws_lambda_function" "lightlytics-init-lambda" {
-  function_name = "${var.environment}-lightlytics-function-Init"
+  function_name = coalesce(var.init_lambda_name, "${var.environment}-lightlytics-function-Init")
   role          = aws_iam_role.lightlytics-init-role.arn
   #  architectures = var.lambda_init_architectures   # requires aws provider 3.61
   handler       = "app.lambda_handler"

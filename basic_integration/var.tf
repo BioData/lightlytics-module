@@ -80,6 +80,11 @@ variable "cloudwatch_secret_policy_name" {
   default     = null
 }
 
+variable "init_lambda_name" {
+  description = "overwrite the default xxx-lightlytics-function-Init name."
+  type        = string
+  default     = null
+}
 ###############------------Environment-----------#############
 
 variable "domain_name" {
